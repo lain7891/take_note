@@ -9,6 +9,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.4"
-  }
+    "express": "^4.17.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lain7891/take_note.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/lain7891/take_note/issues"
+  },
+  "homepage": "https://github.com/lain7891/take_note#readme"
 }
