@@ -1,10 +1,15 @@
+const { json } = require("express");
 const express = require("express");
+const { fstat } = require("fs");
 const path = require("path");
+const fs = require("fs");
 
 const PORT = process.env.PORT || 3000;
 
 // create instance of express
 const app = express();
+
+let notes = [];
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
@@ -25,6 +30,19 @@ app.get("/", (req, res) => {
 app.get("/notes", (req, res) => {
     res.sendFile(path.join(__dirname, "./public/notes.html"))
 });
+
+// API ROUTES
+app.get("/api/notes", (req, res) => {
+    // read file
+    fs.writeFile("./db/db.json", JSON.stringify(notes), (err) => {
+        if (err){
+            throw err;
+        } else {
+            return res.json(notes)
+        }
+    })
+// return res.json(notes)
+})
 
 
 
