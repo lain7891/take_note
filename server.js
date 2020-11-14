@@ -10,9 +10,21 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// Routes to get back the HTML Files
+app.get("/api/config", (req, res)=>{
+    res.json({
+        success: true
+    });
+});
 
+// HTML VIEWS ROUTES
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "./public/index.html"))
+});
 
-
+app.get("/notes", (req, res) => {
+    res.sendFile(path.join(__dirname, "./public/notes.html"))
+});
 
 
 
