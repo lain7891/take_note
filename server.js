@@ -42,11 +42,25 @@ app.get("/api/notes", (req, res) => {
         }
     })
 // return res.json(notes)
+});
+
+app.post("/api/notes", (req,res) => {
+let newNote = req.body;
+fs.writeFile("./db/db.json", JSON.stringify(newNote), (err) => {
+    if (err){
+        throw err;
+    } else {
+        return res.json(newNote)
+    }
 })
+// return res.json(notes)
+});
+// res.json(newNote);
+// })
 
 
 
 // listen on the port
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
-})
+});
