@@ -46,6 +46,7 @@ app.get("/api/notes", (req, res) => {
 
 app.post("/api/notes", (req,res) => {
 let newNote = req.body;
+// notes.push(newNote);
 fs.writeFile("./db/db.json", JSON.stringify(newNote), (err) => {
     if (err){
         throw err;
@@ -58,6 +59,21 @@ fs.writeFile("./db/db.json", JSON.stringify(newNote), (err) => {
 // res.json(newNote);
 // })
 
+app.delete("/api/notes/:id", function(req, res) {
+    var chosen = req.params.id;
+    if (err){
+        throw err;
+    } else {
+        res.json(chosen); 
+    }
+  
+    console.log(chosen);
+    
+      });
+  
+  
+//   res.json(chosen);
+//   });
 
 
 // listen on the port
