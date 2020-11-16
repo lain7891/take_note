@@ -3,16 +3,17 @@ const express = require("express");
 const { fstat } = require("fs");
 const path = require("path");
 const fs = require("fs");
+let notes = require("./db/db.json");
 
 const PORT = process.env.PORT || 3000;
 
 // create instance of express
 const app = express();
 
-let notes = [{
-    "id": 1,
-    "message": "First reminder of the day!",
-}];
+// let notes = [{
+//     "id": 1,
+//     "message": "First reminder of the day!",
+// }];
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
@@ -49,7 +50,9 @@ app.get("/api/notes", (req, res) => {
 });
 
 app.post("/api/notes", (req,res) => {
-let newNoteArray = req.body;
+let newNote = req.body;
+console.log(req.body);
+notes.push(newNote);
 // // const listOfNotes = JSON.parse(notes);
 // listOfNotes.push(newNote);
 // res.json(notes);
@@ -61,8 +64,8 @@ fs.writeFile("./db/db.json", JSON.stringify(newNoteArray), (err) => {
     }
 // })
 // return res.json(listOfNotes;
-});
-notes.push(newNoteArray);
+// });
+// notes.push(newNoteArray);
 // res.json(notes);
 })
 
@@ -101,4 +104,4 @@ app.listen(PORT, () => {
 
 // app.get("*", (req, res) => {
 //     res.sendFile(path.join(__dirname, "./public/index.html"))
-// });
+// })
