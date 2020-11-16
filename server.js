@@ -48,25 +48,34 @@ app.get("/api/notes", (req, res) => {
 });
 
 app.post("/api/notes", (req,res) => {
-let newNote = req.body;
+let newNoteArray = req.body;
 // // const listOfNotes = JSON.parse(notes);
 // listOfNotes.push(newNote);
-res.json(notes);
-fs.writeFile("./db/db.json", JSON.stringify(newNote), (err) => {
+// res.json(notes);
+fs.writeFile("./db/db.json", JSON.stringify(newNoteArray), (err) => {
     if (err){
         throw err;
     } else {
-        return res.json(newNote);
+        return res.send(newNoteArray);
     }
 // })
 // return res.json(listOfNotes;
 });
+notes.push(newNoteArray);
 // res.json(notes);
 })
 
 app.delete("/api/notes/:id", function(req, res) {
-    var chosen = req.params.id;
-    fs.readFile("./db/db.json", JSON.stringify(notes), (err)=> {
+    const chosen = req.params.id;
+    const newNotes = notes.filter((note) => note.id != chosen);
+
+    if (!newNotes) {
+      response.status(500).send('Notes not found.');
+    } else {
+      notes = newNotes;
+      response.send(notes);
+    }
+    fs.writeFile("./db/db.json", JSON.stringify(notes), (err)=> {
         if (err){
             throw err;
         } else {
