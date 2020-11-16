@@ -17,6 +17,7 @@ let notes = [{
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static('public'));
 
 // Routes to get back the HTML Files
 app.get("/api/config", (req, res)=>{
@@ -37,7 +38,7 @@ app.get("/notes", (req, res) => {
 // API ROUTES
 app.get("/api/notes", (req, res) => {
     // read file
-    fs.writeFile("./db/db.json", JSON.stringify(notes), (err) => {
+    fs.readFile("./db/db.json", "utf-8", (err) => {
         if (err){
             throw err;
         } else {
