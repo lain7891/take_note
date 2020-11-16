@@ -9,7 +9,10 @@ const PORT = process.env.PORT || 3000;
 // create instance of express
 const app = express();
 
-let notes = [];
+let notes = [{
+    "id": 1,
+    "message": "First reminder of the day!",
+}];
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
@@ -46,30 +49,35 @@ app.get("/api/notes", (req, res) => {
 
 app.post("/api/notes", (req,res) => {
 let newNote = req.body;
-// notes.push(newNote);
+// // const listOfNotes = JSON.parse(notes);
+// listOfNotes.push(newNote);
+res.json(notes);
 fs.writeFile("./db/db.json", JSON.stringify(newNote), (err) => {
     if (err){
         throw err;
     } else {
-        return res.json(newNote)
+        return res.json(newNote);
     }
-})
-// return res.json(notes)
-});
-// res.json(newNote);
 // })
+// return res.json(listOfNotes;
+});
+// res.json(notes);
+})
 
 app.delete("/api/notes/:id", function(req, res) {
     var chosen = req.params.id;
-    if (err){
-        throw err;
-    } else {
-        res.json(chosen); 
-    }
-  
-    console.log(chosen);
-    
-      });
+    fs.readFile("./db/db.json", JSON.stringify(notes), (err)=> {
+        if (err){
+            throw err;
+        } else {
+            res.json(chosen); 
+        }
+      
+        console.log(chosen);
+        
+          });
+
+    });
   
   
 //   res.json(chosen);
@@ -80,3 +88,7 @@ app.delete("/api/notes/:id", function(req, res) {
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+// app.get("*", (req, res) => {
+//     res.sendFile(path.join(__dirname, "./public/index.html"))
+// });
