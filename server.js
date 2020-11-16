@@ -52,19 +52,20 @@ app.get("/api/notes", (req, res) => {
 app.post("/api/notes", (req,res) => {
 let newNote = req.body;
 console.log(req.body);
+newNote.id = notes.length;
 notes.push(newNote);
 // // const listOfNotes = JSON.parse(notes);
 // listOfNotes.push(newNote);
 // res.json(notes);
-fs.writeFile("./db/db.json", JSON.stringify(newNoteArray), (err) => {
+fs.writeFile("./db/db.json", JSON.stringify(notes), (err) => {
     if (err){
         throw err;
     } else {
-        return res.send(newNoteArray);
+        return res.send(newNote);
     }
 // })
 // return res.json(listOfNotes;
-// });
+});
 // notes.push(newNoteArray);
 // res.json(notes);
 })
