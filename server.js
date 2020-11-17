@@ -96,16 +96,12 @@ app.post("/api/notes", (req,res) => {
             return res.json(newNote)
 
         }
+       
     })
-    // return res.json(notes)
+  
+   
     });
-    // res.json(newNote);
-    // })
-    // return res.json(listOfNotes;
     
-    // res.json(notes);
-
-
 
 
 app.delete("/api/notes/:id", function(req, res) {
