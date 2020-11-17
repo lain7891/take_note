@@ -54,14 +54,12 @@ let newNote = req.body;
 console.log(req.body);
 newNote.id = notes.length;
 notes.push(newNote);
-// // const listOfNotes = JSON.parse(notes);
-// listOfNotes.push(newNote);
 // res.json(notes);
 fs.writeFile("./db/db.json", JSON.stringify(notes), (err) => {
     if (err){
         throw err;
     } else {
-        return res.send(newNote);
+        return res.json(newNote);
     }
 // })
 // return res.json(listOfNotes;
@@ -78,7 +76,7 @@ app.delete("/api/notes/:id", function(req, res) {
       response.status(500).send('Notes not found.');
     } else {
       notes = newNotes;
-      response.send(notes);
+    //   response.send(notes);
     }
     fs.writeFile("./db/db.json", JSON.stringify(notes), (err)=> {
         if (err){
@@ -97,7 +95,6 @@ app.delete("/api/notes/:id", function(req, res) {
 //   res.json(chosen);
 //   });
 
-
 // listen on the port
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
@@ -105,4 +102,4 @@ app.listen(PORT, () => {
 
 // app.get("*", (req, res) => {
 //     res.sendFile(path.join(__dirname, "./public/index.html"))
-// })
+// });
