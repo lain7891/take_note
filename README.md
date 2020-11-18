@@ -1,5 +1,7 @@
 # take_note
 
+ ![badge](https://img.shields.io/badge/MIT-License-<color>)
+
 For this assignment we used an express backend and saved and retrieved the note data from a JSON file. We had to create an application that would write, save and delete notes. This is a great application for users to keep track of reminders, keep lists and be able to delete them when they are finished with it.
 
 As a user, I want to be able to write and save notes. I want to be able to delete notes that I’ve written before so that I can organize my thoughts and keep track of tasks I need to complete. 
