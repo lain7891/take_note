@@ -43,7 +43,8 @@ app.get("/notes", (req, res) => {
 // API ROUTES
 app.get("/api/notes", (req, res) => {
     // read file
-    fs.readFile("./db/db.json", "utf-8", (err) => {
+    
+    fs.readFile("./db/db.json", "utf-8", (err, data) => {
         if (err){
             throw err;
         } else {
@@ -60,8 +61,15 @@ app.get("/api/notes", (req, res) => {
 //     let newNote = req.body;
 //     console.log(req.body);
 //     newNote.id = notes.length;
-//     notes.push(newNote);
-//     // res.json(notes);
+//     notesArray.push(newNote);
+//     notes = JSON.parse(fs.readFileSync("./db/db.json", "utf-8", (err) => {
+//                 if (err){
+//                     throw err;
+//                 } else {
+//                     return res.json(notes)
+//                 }
+//             }));
+//     res.json(notes);
 //     fs.writeFile("./db/db.json", JSON.stringify(notes), (err) => {
 //         if (err){
 //             throw err;
@@ -76,26 +84,39 @@ app.get("/api/notes", (req, res) => {
 //     })
       
 app.post("/api/notes", (req,res) => {
-    let newNote = req.body;
-    newNote.id = notesArray.length;
-    // notes.push(newNote);
-    // const listOfNotes = JSON.parse(notes);
-    // listOfNotes.push(newNote);
-    fs.readFile("./db/db.json", "utf-8", (err) => {
+    // let newNote = req.body;
+    // console.log(req.body);
+    // const notesArray = JSON.parse(newNote);
+    // notesArray.push(newNote);
+    // newNote.id = notesArray.length;
+    //  let newNote = {...req.body, id: notesArray.length}
+    //  console.log(newNote);
+    //  notesArray.push(newNote);
+//    fs.readFileSync("./db/db.json", "utf-8", (err) => {
+//         if (err){
+//             throw err;
+//         }else {
+//             return res.send()
+//         }    
+//     });
+    const notesArray = JSON.parse( fs.readFileSync("./db/db.json", "utf-8", (err) => {
         if (err){
             throw err;
-        } else {
+        }else {
+            return res.send(notes)
+        }    
+    }));
+    const newNote = {...req.body, id: notesArray.length}
+    console.log(newNote);
+    console.log(notesArray);
+     notesArray.push(newNote);
+    fs.writeFile("./db/db.json", JSON.stringify(notesArray), "utf-8", (err) => {
+        if (err){
+            throw err;
+        } else
+        {
             return res.json(notes)
-        }
-    })
-    notesArray.push(newNote);
-    fs.writeFile("./db/db.json", JSON.stringify(newNote), (err) => {
-        if (err){
-            throw err;
-        } else {
-            return res.json(newNote)
-
-        }
+        } 
        
     })
   
