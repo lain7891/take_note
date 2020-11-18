@@ -103,14 +103,14 @@ app.post("/api/notes", (req,res) => {
         if (err){
             throw err;
         }else {
-            return res.send(notes)
+            return res.send(newNote)
         }    
     }));
     const newNote = {...req.body, id: notesArray.length}
     console.log(newNote);
     console.log(notesArray);
      notesArray.push(newNote);
-    fs.writeFile("./db/db.json", JSON.stringify(notesArray), "utf-8", (err) => {
+    fs.writeFile("./db/db.json", JSON.stringify(notes), "utf-8", (err) => {
         if (err){
             throw err;
         } else
