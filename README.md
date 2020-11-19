@@ -20,6 +20,12 @@ As a user, I want to be able to write and save notes. I want to be able to delet
 
 ## Usage
 
+![readme-gif](assets/takeNote.gif)
+
+<img src="assets/Home.png" width="800" height="600"/>
+<img src="assets/AddedNote.png" width="800" height="600"/>
+<img src="assets/Note.png" width="800" height="600"/>
+
 * Express
 * Variable Created 
 * If/Else statement
